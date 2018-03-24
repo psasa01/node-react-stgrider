@@ -33,14 +33,14 @@ passport.use(new GoogleStrategy(
                 ]
             }, (err, user) => {
                 if (err) return done(err);
-    
+
                 if (user) {
                     if (user.google.id == undefined) {
                         user.google.id = profile.id;
                         user.google.name = profile.displayName;
                         user.google.token = accessToken;
                         user.save();
-    
+
                     }
                     return done(null, user);
                 } else {
@@ -53,7 +53,7 @@ passport.use(new GoogleStrategy(
                     newUser.slika = profile.photos[0].value;
                     newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
 
-    
+
                     newUser.save((err) => {
                         if (err) throw err;
                         return done(null, newUser);
@@ -62,7 +62,7 @@ passport.use(new GoogleStrategy(
             });
         });
     }))
-    
+
 
 passport.use(new FacebookStrategy({
     clientID: keys.FACEBOOK_APP_ID,
@@ -70,7 +70,7 @@ passport.use(new FacebookStrategy({
     callbackURL: keys.FACEBOOK_APP_CALLBACK,
     profileFields: ['id', 'emails', 'name']
 }, (accessToken, refreshToken, profile, done) => {
-       process.nextTick(() => {
+    process.nextTick(() => {
         User.findOne({
             $or: [{
                 'facebook.id': profile.id
@@ -111,3 +111,5 @@ passport.use(new FacebookStrategy({
         });
     });
 }))
+
+/////
