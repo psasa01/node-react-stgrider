@@ -70,6 +70,7 @@ passport.use(new FacebookStrategy({
     callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/facebook/callback'
 }, (accessToken, refreshToken, profile, done) => {
        process.nextTick(() => {
+           console.log(profile);
         User.findOne({
             $or: [{
                 'facebook.id': profile.id
