@@ -67,7 +67,8 @@ passport.use(new GoogleStrategy(
 passport.use(new FacebookStrategy({
     clientID: keys.FACEBOOK_APP_ID,
     clientSecret: keys.FACEBOOK_APP_SECRET,
-    callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/facebook/callback'
+    callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/facebook/callback',
+    profileFields: ['email']
 }, (accessToken, refreshToken, profile, done) => {
        process.nextTick(() => {
            console.log(profile);
