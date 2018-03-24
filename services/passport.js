@@ -20,52 +20,93 @@ passport.use(new GoogleStrategy(
     {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
+        callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/google/callback'
     }, (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        User.findOne({ email: profile.emails[0].value }).then(existingUser => {
-            if (existingUser.googleId === profile.id) {
-                done(null, existingUser);
-            } else if (existingUser.googleId === undefined) {
-                existingUser({ 
-                    googleId: profile.id,
-                    googleName: profile.displayName
-                })
-                    .save()
-                    .then(user => done(null, user));
-            } else {
-                new User ({
-                    googleId: profile.id,
-                    googleName: profile.displayName,
-                    email: profile.emails[0].value
-                })
-            }
+        process.nextTick(() => {
+            User.findOne({
+                $or: [{
+                    'google.id': profile.id
+                },
+                {
+                    'email': profile.emails[0].value
+                }
+                ]
+            }, (err, user) => {
+                if (err) return done(err);
+    
+                if (user) {
+                    if (user.google.id == undefined) {
+                        user.google.id = profile.id;
+                        user.google.name = profile.displayName;
+                        user.google.token = accessToken;
+                        user.save();
+    
+                    }
+                    return done(null, user);
+                } else {
+                    const newUser = new User();
+                    newUser.google.id = profile.id;
+                    user.google.name = profile.displayName;
+                    newUser.google.token = accessToken;
+
+                    newUser.email = profile.emails[0].value;
+                    newUser.slika = profile.photos[0].value;
+                    newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
+
+    
+                    newUser.save((err) => {
+                        if (err) throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
         });
-    }
-))
+    }))
+    
 
 passport.use(new FacebookStrategy({
     clientID: keys.FACEBOOK_APP_ID,
     clientSecret: keys.FACEBOOK_APP_SECRET,
     callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/facebook/callback'
 }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
-    User.findOne({ email: profile.emails[0].value }).then(existingUser => {
-        if (existingUser.fbId === profile.id) {
-            done(null, existingUser);
-        } else if (existingUser.fbId === undefined) {
-            existingUser({ 
-                fbId: profile.id,
-                fbName: profile.name
-            })
-                .save()
-                .then(user => done(null, user));
-        } else {
-            new User ({
-                fbId: profile.id,
-                fbName: profile.name,
-                email: profile.emails[0].value
-            })
-        }
+       process.nextTick(() => {
+        User.findOne({
+            $or: [{
+                'facebook.id': profile.id
+            },
+            {
+                'email': profile.emails[0].value
+            }
+            ]
+        }, (err, user) => {
+            if (err) return done(err);
+
+            if (user) {
+                if (user.facebook.id == undefined) {
+                    user.facebook.id = profile.id;
+                    user.facebook.token = accessToken;
+                    user.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
+                    
+                    user.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+                    user.save();
+
+                }
+                return done(null, user);
+            } else {
+                const newUser = new User();
+                newUser.facebook.id = profile.id;
+                newUser.facebook.token = accessToken;
+                newUser.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
+
+                newUser.email = profile._json.email;
+                newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
+                newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+
+                newUser.save((err) => {
+                    if (err) throw err;
+                    return done(null, newUser);
+                });
+            }
+        });
     });
-}));
+}))
