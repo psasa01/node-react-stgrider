@@ -35,6 +35,3 @@ app.listen(PORT, () => {
 });
 
 
-// mongodb://sgrider_prod:sgrider@ds123029.mlab.com:23029/sgrider-node-react-prod
-// 104663614997-mbv4id0hoek2bansfsvuu1an8lp5t9ti.apps.googleusercontent.com
-// 1A0enV9XuAWzGT0pwjYcE3r9
