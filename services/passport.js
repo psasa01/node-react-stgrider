@@ -20,7 +20,7 @@ passport.use(new GoogleStrategy(
     {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/google/callback'
+        callbackURL: '/auth/google/callback'
     }, (accessToken, refreshToken, profile, done) => {
         process.nextTick(() => {
             User.findOne({
@@ -86,7 +86,7 @@ passport.use(new FacebookStrategy({
                     user.facebook.id = profile.id;
                     user.facebook.token = accessToken;
                     user.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
-                    
+
                     user.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
                     user.save();
 
