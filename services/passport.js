@@ -38,6 +38,6 @@ passport.use(new FacebookStrategy({
     clientID: keys.FACEBOOK_APP_ID,
     clientSecret: keys.FACEBOOK_APP_SECRET,
     callbackURL: 'https://shrouded-coast-13620.herokuapp.com//auth/facebook/callback'
-}, accessToken => {
-    console.log(accessToken);
+}, (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
 }));
