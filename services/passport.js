@@ -46,7 +46,7 @@ passport.use(new GoogleStrategy(
                 } else {
                     const newUser = new User();
                     newUser.google.id = profile.id;
-                    user.google.name = profile.displayName;
+                    newUser.google.name = profile.displayName;
                     newUser.google.token = accessToken;
 
                     newUser.email = profile.emails[0].value;
