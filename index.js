@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
+const expressValidator = require('express-validator');
 const passport = require('passport');
 const keys = require('./config/keys');
 
@@ -11,6 +13,15 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+
+// validation
+app.use(expressValidator());
+
+// body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(
     cookieSession({
@@ -25,7 +36,13 @@ app.get('/', (req, res) => {
     res.send({
         hi: 'there'
     })
-} )
+})
+
+app.get('/user', (req, res) => {
+    res.send({
+        hi: req.user
+    })
+})
 
 require('./routes/authRoutes')(app);
 

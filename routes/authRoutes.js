@@ -1,3 +1,4 @@
+const authController = require('../controllers/authController');
 const passport = require('passport');
 
 module.exports = (app) => {
@@ -29,4 +30,13 @@ module.exports = (app) => {
     app.get(
         '/auth/facebook/callback',
         passport.authenticate('facebook'));
+
+    app.post('/register',
+        // authController.validateRegister,
+        authController.register
+    )
+
+    app.post('/auth/login', passport.authenticate('local'), (req, res) => {
+        res.send(req.user);
+    });
 }
