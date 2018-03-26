@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const expressValidator = require('express-validator');
 const passport = require('passport');
 const keys = require('./config/keys');
+const flash = require('connect-flash');
 
 // user always must be required before passport!!!!!!!
 require('./models/User');
@@ -29,6 +30,7 @@ app.use(
         keys: [keys.cookieKey]
     })
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

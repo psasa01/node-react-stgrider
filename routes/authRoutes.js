@@ -31,12 +31,15 @@ module.exports = (app) => {
         '/auth/facebook/callback',
         passport.authenticate('facebook'));
 
-    app.post('/register',
+    app.get('/auth/register',
         authController.validateRegister,
         authController.register
     )
 
-    app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-        res.send(req.user);
-    });
+    app.get('/auth/login', passport.authenticate('local', {
+        failureRedirect: '/login',
+        failureFlash: { type: 'error', message: 'GreĹˇka pri prijavljivanju!' },
+        successRedirect: '/',
+        successFlash: 'UspjeĹˇno ste se prijavili. DobrodoĹˇli na "Moju Kolekciju Vina"!'
+    }))
 }
