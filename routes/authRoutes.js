@@ -32,7 +32,7 @@ module.exports = (app) => {
         passport.authenticate('facebook'));
 
     app.post('/register',
-        // authController.validateRegister,
+        authController.validateRegister,
         authController.register
     )
 

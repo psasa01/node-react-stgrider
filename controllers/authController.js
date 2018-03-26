@@ -5,27 +5,27 @@ const randomstring = require('randomstring');
 // const mailer = require('../handlers/mailer');
 const passport = require('passport');
 
-// exports.validateRegister = (req, res, next) => {
-//     req.sanitizeBody('name');
-//     req.checkBody('name', 'Morate unijeti korisničko ime!').notEmpty();
-//     req.checkBody('email', 'Email koji ste unijeli nažalost nije ispravan!').isEmail();
-//     req.sanitizeBody('email').normalizeEmail({
-//         remove_dots: false,
-//         remove_extension: false,
-//         gmail_remove_subaddress: false
-//     });
-//     req.checkBody('password', 'Morate unijeti šifru!').notEmpty();
-//     req.checkBody('password-potvrda', 'Morate potvrditi šifru!').notEmpty();
-//     req.checkBody('password-potvrda', 'Nažalost, šifre se ne podudaraju!').equals(req.body.password);
+exports.validateRegister = (req, res, next) => {
+    req.sanitizeBody('name');
+    req.checkBody('name', 'Morate unijeti korisničko ime!').notEmpty();
+    req.checkBody('email', 'Email koji ste unijeli nažalost nije ispravan!').isEmail();
+    req.sanitizeBody('email').normalizeEmail({
+        remove_dots: false,
+        remove_extension: false,
+        gmail_remove_subaddress: false
+    });
+    req.checkBody('password', 'Morate unijeti šifru!').notEmpty();
+    req.checkBody('password-potvrda', 'Morate potvrditi šifru!').notEmpty();
+    req.checkBody('password-potvrda', 'Nažalost, šifre se ne podudaraju!').equals(req.body.password);
 
-//     const errors = req.validationErrors();
-//     if (errors) {
-//         res.send({ message: errors.map(err => err.msg) });
+    const errors = req.validationErrors();
+    if (errors) {
+        res.send({ message: errors.map(err => err.msg) });
 
-//         return; // stop
-//     }
-//     next(); // no errors
-// }
+        return; // stop
+    }
+    next(); // no errors
+}
 
 exports.register = async (req, res) => {
     console.log(req.body);
