@@ -36,10 +36,7 @@ module.exports = (app) => {
         authController.register
     )
 
-    app.get('/auth/login', passport.authenticate('local', {
-        failureRedirect: '/login',
-        failureFlash: { type: 'error', message: 'GreĹˇka pri prijavljivanju!' },
-        successRedirect: '/',
-        successFlash: 'UspjeĹˇno ste se prijavili. DobrodoĹˇli na "Moju Kolekciju Vina"!'
-    }))
+    app.get('/auth/login', passport.authenticate('local'), (req, res) => {
+        res.send(req.user);
+    });
 }

@@ -15,13 +15,12 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-// validation
-app.use(expressValidator());
+
 
 // body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
 
 app.use(
@@ -33,6 +32,9 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+// validation
+app.use(expressValidator());
 
 app.get('/', (req, res) => {
     res.send({
