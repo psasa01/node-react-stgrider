@@ -11,11 +11,19 @@ module.exports = (app) => {
 
     app.get(
         '/auth/google/callback',
-        passport.authenticate('google'));
+        passport.authenticate('google'),
+        (req, res) => {
+            
+            req.flash('success', 'You successfully logged in with Google!');
+            res.redirect('/');
+        }
+    
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send({ message: 'You successfully logged out!' });
+        req.flash({ 'success': 'You successfully logged out!' });
+        res.redirect('/');
     })
 
     app.get('/api/current_user', (req, res) => {
