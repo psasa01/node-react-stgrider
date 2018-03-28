@@ -4,51 +4,20 @@ class Register extends Component {
     render() {
         return (
 
-            <div className="row">
-            <br/>
-            <br/>
-                <form className="col s12">
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <input placeholder="Placeholder" id="first_name" type="text" className="validate" />
-                            <label for="first_name">First Name</label>
-                        </div>
-                        <div className="input-field col s6">
-                            <input id="last_name" type="text" className="validate" />
-                            <label for="last_name">Last Name</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input disabled value="I am not editable" id="disabled" type="text" className="validate" />
-                            <label for="disabled">Disabled</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input id="password" type="password" className="validate" />
-                            <label for="password">Password</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input id="email" type="email" className="validate" />
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12">
-                            This is an inline input field:
-                  <div className="input-field inline">
-                                <input id="email_inline" type="email" className="validate" />
-                                <label for="email_inline">Email</label>
-                                <span className="helper-text" data-error="wrong" data-success="right">Helper text</span>
-                            </div>
-                        </div>
-                    </div>
+            <div>
+                <h2>Please enter registration details</h2>
+                <form action="/auth/register" method="POST">
+                    <label htmlFor="name">Enter name</label>
+                    <input className="validate" type="text" name="name" />
+                    <label htmlFor="email">Enter Email</label>
+                    <input className="validate" type="email" name="email" />
+                    <label htmlFor="password">Enter Password</label>
+                    <input className="validate" type="password" name="password" />
+                    <label htmlFor="password-potvrda">Confirm Password</label>
+                    <input className="validate" type="password" name="password-potvrda" />
+                    <button type="submit">Submit</button>
                 </form>
             </div>
-
 
         )
     }

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const validator = require('validator');
 const passportLocalMongoose = require('passport-local-mongoose');
+const md5 = require('md5');
 
 const userSchema = new Schema({
     google: {
@@ -31,6 +32,15 @@ const userSchema = new Schema({
         ]
     },
     slika: String
+},
+    // https://stackoverflow.com/questions/13133911/cant-get-mongoose-virtuals-to-be-part-of-the-result-object
+    {
+        toObject: { virtuals: true }
+    });
+
+userSchema.virtual('gravatar').get(function () {
+    const hash = md5(this.email);
+    return `https://gravatar.com/avatar/${hash}?s=50`;
 });
 
 userSchema.plugin(passportLocalMongoose, {

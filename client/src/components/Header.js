@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
     renderContent() {
+        console.log(this.props.auth)
         switch (this.props.auth) {
             case null:
                 return (
@@ -13,12 +14,12 @@ class Header extends Component {
             case false:
                 return (
                     <ul>
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li>
-                        <a href="/register">Register</a>
-                    </li>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/register">Register</a>
+                        </li>
                         <li>
                             <a href="/auth/google">Google</a>
                         </li>
@@ -38,7 +39,7 @@ class Header extends Component {
                             {this.props.auth.ime}
                         </li>
                         <li>&nbsp;&nbsp;
-                            <img className="circle" style={{margin: "0.6em"}} src={this.props.auth.slika} alt="" />&nbsp;&nbsp;
+                            <img className="circle" style={{ margin: "0.6em" }} src={this.props.auth.slika || this.props.auth.gravatar} alt="" />&nbsp;&nbsp;
                         </li>
                     </ul>
                 )
@@ -47,7 +48,7 @@ class Header extends Component {
     render() {
         return (
             <nav>
-                <div className="nav-wrapper">
+                <div className="nav-wrapper indigo darken-4">
                     <a href="/" className="left brand-logo">&nbsp;&nbsp;Emaily</a>
                     <ul className="right">
                         <li>

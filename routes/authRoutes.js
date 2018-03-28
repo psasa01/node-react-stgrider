@@ -13,11 +13,11 @@ module.exports = (app) => {
         '/auth/google/callback',
         passport.authenticate('google'),
         (req, res) => {
-            
+
             req.flash('success', 'You successfully logged in with Google!');
             res.redirect('/');
         }
-    
+
     );
 
     app.get('/api/logout', (req, res) => {
@@ -39,12 +39,12 @@ module.exports = (app) => {
         '/auth/facebook/callback',
         passport.authenticate('facebook'));
 
-    app.get('/auth/register',
+    app.post('/auth/register',
         authController.validateRegister,
         authController.register
     )
 
-    app.get('/auth/login', passport.authenticate('local'), (req, res) => {
-        res.send(req.user);
+    app.post('/auth/login', passport.authenticate('local'), (req, res) => {
+        res.redirect('/');
     });
 }

@@ -20,7 +20,7 @@ exports.validateRegister = (req, res, next) => {
 
     const errors = req.validationErrors();
     if (errors) {
-        res.send({ message: errors.map(err => err.msg) });
+        req.flash({ 'error': errors.map(err => err.msg) });
 
         return; // stop
     }
@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
         email: req.body.email
     });
     if (userFind) {
-        res.send({ message: 'Korisnik s navedenom email adresom već postoji!' });
+        req.flash({ 'error': 'Korisnik s navedenom email adresom već postoji!' });
 
     } else {
 
@@ -65,7 +65,8 @@ exports.register = async (req, res) => {
         const register = promisify(User.register, User);
         await register(user, req.body.password);
 
-        res.send({ message: 'Uspješno ste se registrovali.' });
+        req.flash({ 'success': 'Uspješno ste se registrovali.' });
+        res.redirect('/login');
 
     }
 };
