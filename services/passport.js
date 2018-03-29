@@ -51,6 +51,7 @@ passport.use(new GoogleStrategy(
                     newUser.google.name = profile.displayName;
                     newUser.google.token = accessToken;
 
+                    newUser.email = profile.emails[0].value;
                     newUser.slika = profile.photos[0].value;
                     newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
 
@@ -100,8 +101,9 @@ passport.use(new FacebookStrategy({
                 newUser.facebook.token = accessToken;
                 newUser.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
 
+                newUser.email = profile._json.email;
                 newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
-                newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=small`;
+                newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
 
                 newUser.save((err) => {
                     if (err) throw err;
