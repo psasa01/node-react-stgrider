@@ -101,7 +101,6 @@ passport.use(new FacebookStrategy({
                 newUser.facebook.token = accessToken;
                 newUser.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
 
-                newUser.email = profile._json.email;
                 newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
                 newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=small`;
 

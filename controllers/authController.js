@@ -33,9 +33,10 @@ exports.register = async (req, res) => {
         email: req.body.email
     });
     if (userFind) {
-        req.flash({ 'error': 'Korisnik s navedenom email adresom već postoji!' });
-        res.redirect('/login');
-
+        if (userFind.hash) {
+            req.flash({ 'error': 'Korisnik s navedenom email adresom već postoji!' });
+            res.redirect('/login');
+        }
     } else {
 
         // secret token
