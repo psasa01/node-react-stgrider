@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy(
     {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: 'https://shrouded-coast-13620.herokuapp.com/auth/google/callback'
+        callbackURL: keys.googleCallback,
     }, (accessToken, refreshToken, profile, done) => {
         process.nextTick(() => {
             User.findOne({
