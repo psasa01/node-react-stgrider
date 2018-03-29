@@ -24,6 +24,7 @@ module.exports = (app) => {
         req.logout();
         req.flash({ 'success': 'You successfully logged out!' });
         res.redirect('/');
+        console.log('locals: ', res);
     })
 
     app.get('/api/current_user', (req, res) => {

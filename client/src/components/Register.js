@@ -15,7 +15,7 @@ class Register extends Component {
                     <input className="validate" type="password" name="password" />
                     <label htmlFor="password-potvrda">Confirm Password</label>
                     <input className="validate" type="password" name="password-potvrda" />
-                    <button type="submit">Submit</button>
+                    <button className="btn indigo waves-effect waves-light darken-4" type="submit">Submit</button>
                 </form>
             </div>
 

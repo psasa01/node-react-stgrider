@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
     renderContent() {
@@ -8,17 +9,29 @@ class Header extends Component {
             case null:
                 return (
                     <ul>
-                        <li>Loading... &nbsp;&nbsp;</li>
+                        <li>
+                            <div className="preloader-wrapper small active" style={{ margin: "0.8em" }}>
+                                <div className="spinner-layer spinner-blue-only">
+                                    <div className="circle-clipper left">
+                                        <div className="circle"></div>
+                                    </div><div className="gap-patch">
+                                        <div className="circle"></div>
+                                    </div><div className="circle-clipper right">
+                                        <div className="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 )
             case false:
                 return (
                     <ul>
                         <li>
-                            <a href="/login">Login</a>
+                            <Link to="/login">Login</Link>
                         </li>
                         <li>
-                            <a href="/register">Register</a>
+                            <Link to="/register">Register</Link>
                         </li>
                         <li>
                             <a href="/auth/google">Google</a>
@@ -49,7 +62,7 @@ class Header extends Component {
         return (
             <nav>
                 <div className="nav-wrapper indigo darken-4">
-                    <a href="/" className="left brand-logo">&nbsp;&nbsp;Emaily</a>
+                    <Link to="/" className="left brand-logo">&nbsp;&nbsp;Emaily</Link>
                     <ul className="right">
                         <li>
                             {this.renderContent()}
