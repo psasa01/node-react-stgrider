@@ -103,7 +103,7 @@ passport.use(new FacebookStrategy({
 
                 newUser.email = profile._json.email;
                 newUser.ime = `${profile.name.givenName} ${profile.name.familyName}`;
-                newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+                newUser.slika = `https://graph.facebook.com/${profile.id}/picture?type=small`;
 
                 newUser.save((err) => {
                     if (err) throw err;
