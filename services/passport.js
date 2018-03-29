@@ -90,7 +90,7 @@ passport.use(new FacebookStrategy({
                     user.facebook.token = accessToken;
                     user.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
 
-                    user.slika = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+                    user.slika = `https://graph.facebook.com/${profile.id}/picture?type=small`;
                     user.save();
 
                 }
