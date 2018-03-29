@@ -36,12 +36,6 @@ app.use(passport.session());
 // validation
 app.use(expressValidator());
 
-app.get('/', (req, res) => {
-    res.send({
-        hi: 'there'
-    })
-})
-
 app.get('/user', (req, res) => {
     res.send({
         hi: req.user
@@ -50,7 +44,7 @@ app.get('/user', (req, res) => {
 
 require('./routes/authRoutes')(app);
 
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
     // main.js, main.css
     app.use(express.static('client/build'));
