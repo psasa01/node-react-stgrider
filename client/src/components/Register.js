@@ -5,7 +5,7 @@ class Register extends Component {
         return (
 
             <div>
-                <h2>Please enter registration details</h2>
+                <h3>Please enter registration details</h3>
                 <form action="/auth/register" method="POST">
                     <label htmlFor="name">Enter name</label>
                     <input className="validate" type="text" name="name" />
