@@ -36,6 +36,10 @@ exports.register = async (req, res) => {
         if (userFind.hash) {
             req.flash({ 'error': 'Korisnik s navedenom email adresom već postoji!' });
             res.redirect('/login');
+        } else {
+            await userFind.setPassword(req.body.password);
+            await userFind.save();
+            res.redirect('/login');
         }
     } else {
 
