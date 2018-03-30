@@ -8,5 +8,7 @@ module.exports = {
     FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET,
     FACEBOOK_APP_CALLBACK: process.env.FACEBOOK_APP_CALLBACK,
     mongoURI: process.env.MONGO_URI,
-    cookieKey: process.env.COOKIE_KEY
+    cookieKey: process.env.COOKIE_KEY,
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY
 }

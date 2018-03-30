@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Payments from './Payments'
+
 
 class Header extends Component {
     renderContent() {
@@ -45,13 +47,22 @@ class Header extends Component {
                 return (
                     <ul>
                         <li>
+                            <Payments />
+                        </li>
+                        <li>
+                        <div className="btn blue lighten-1" style={{marginLeft: ".4em", cursor: "default"}}>
+                        Credits: {this.props.auth.credits}
+                        </div>
+                            
+                        </li>
+                        <li>
                             <a href="/api/logout">Logout</a>
                         </li>
                         <li>
                             {this.props.auth.ime}
                         </li>
                         <li>&nbsp;&nbsp;
-                            <img className="circle" style={{ margin: "0.6em" }} src={this.props.auth.slika || this.props.auth.gravatar} alt="" />&nbsp;&nbsp;
+                            <img className="circle" style={{ margin: "0.45em" }} src={this.props.auth.slika || this.props.auth.gravatar} alt="" />&nbsp;&nbsp;
                         </li>
                     </ul>
                 )

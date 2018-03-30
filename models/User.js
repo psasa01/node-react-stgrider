@@ -31,7 +31,11 @@ const userSchema = new Schema({
             'Nažalost niste unijeli validnu email adresu!'
         ]
     },
-    slika: String
+    slika: String,
+    credits: {
+        type: Number,
+        default: 0
+    }
 },
     // https://stackoverflow.com/questions/13133911/cant-get-mongoose-virtuals-to-be-part-of-the-result-object
     {

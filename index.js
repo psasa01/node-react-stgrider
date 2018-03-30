@@ -43,6 +43,7 @@ app.get('/user', (req, res) => {
 })
 
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
@@ -61,5 +62,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log('server started on port ' + PORT)
 });
+
 
 
