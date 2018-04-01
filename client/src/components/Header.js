@@ -50,10 +50,10 @@ class Header extends Component {
                             <Payments />
                         </li>
                         <li>
-                        <div className="btn blue lighten-1" style={{marginLeft: ".4em", cursor: "default"}}>
-                        Credits: {this.props.auth.credits}
-                        </div>
-                            
+                            <div className="btn indigo darken-2" style={{ marginLeft: ".4em", cursor: "default" }}>
+                                Credits: {this.props.auth.credits}
+                            </div>
+
                         </li>
                         <li>
                             <a href="/api/logout">Logout</a>
@@ -72,7 +72,7 @@ class Header extends Component {
         return (
             <nav>
                 <div className="nav-wrapper indigo darken-4">
-                    <Link to="/" className="left brand-logo">&nbsp;&nbsp;Emaily</Link>
+                    <Link to={this.props.auth ? '/surveys' : '/'} className="left brand-logo">&nbsp;&nbsp;Emaily</Link>
                     <ul className="right">
                         <li>
                             {this.renderContent()}

@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 
 // user always must be required before passport!!!!!!!
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -36,14 +37,9 @@ app.use(passport.session());
 // validation
 app.use(expressValidator());
 
-app.get('/user', (req, res) => {
-    res.send({
-        hi: req.user
-    })
-})
-
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
