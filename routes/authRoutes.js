@@ -24,7 +24,7 @@ module.exports = (app) => {
         req.logout();
         req.flash({ 'success': 'You successfully logged out!' });
         res.redirect('/');
-        console.log('locals: ', res);
+     
     })
 
     app.get('/api/current_user', (req, res) => {
@@ -47,7 +47,7 @@ module.exports = (app) => {
 
     app.post('/auth/login', passport.authenticate('local'), (req, res) => {
         req.flash({ 'success': 'Login Successfull!' });
-        console.log('flash: ', res);
+      
         res.redirect('/');
     });
 }

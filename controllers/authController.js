@@ -28,7 +28,7 @@ exports.validateRegister = (req, res, next) => {
 }
 
 exports.register = async (req, res) => {
-    console.log(req.body);
+   
     const userFind = await User.findOne({
         email: req.body.email
     });
