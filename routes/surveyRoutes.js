@@ -1,6 +1,10 @@
 const surveyController = require('../controllers/surveyController');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
+const _ = require('lodash');
+const Path = require('path-parser');
+const { URL } = require('url');
+
 
 module.exports = (app) => {
     
@@ -13,4 +17,10 @@ module.exports = (app) => {
         requireCredits,
         surveyController.createSurvey
     )
+
+    app.post('/api/surveys/webhooks', (req, res) => {
+        console.log(req.body);
+        res.send({});
+
+    })
 }
